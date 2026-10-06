@@ -1,4 +1,4 @@
-import cloudflare from "@astrojs/cloudflare";
+import cloudflare, { sandbox } from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig, fontProviders } from "astro/config";
@@ -17,15 +17,18 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
 			
-			// الإضافات المعزولة (Sandboxed Plugins) إن وجدت
+			// 1. تشغيل مشغل بيئة العزل (مطلوب لتفعيل السجل والإضافات المعزولة)
+			sandboxRunner: sandbox(),
+
+			// 2. تفعيل وإعداد السجل الرسمي لـ EmDash
+			registry: {
+				aggregatorUrl: "https://registry.emdashcms.com",
+			},
+			
+			// الإضافات المعزولة المضافة محلياً (إن وجدت)
 			sandboxed: [
 				// "@example/my-sandboxed-plugin"
 			],
-
-			// إعدادات السجل (Registry Configuration)
-			registry: {
-				enabled: true,
-			},
 		}),
 	],
 	fonts: [
@@ -34,7 +37,7 @@ export default defineConfig({
 			name: "Inter",
 			cssVariable: "--font-body",
 			weights: [400, 500, 600, 700],
-			fallbacks: ["sans-serif"],
+			fallfalls: ["sans-serif"],
 		},
 		{
 			provider: fontProviders.google(),
