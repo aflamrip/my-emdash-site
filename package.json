@@ -1,38 +1,32 @@
-import cloudflare from "@astrojs/cloudflare";
-import react from "@astrojs/react";
-import { d1, r2 } from "@emdash-cms/cloudflare";
-import { defineConfig, fontProviders } from "astro/config";
-import emdash from "emdash/astro";
-
-export default defineConfig({
-	output: "server",
-	adapter: cloudflare(),
-	image: {
-		layout: "constrained",
-		responsiveStyles: true,
-	},
-	integrations: [
-		react(),
-		emdash({
-			database: d1({ binding: "DB", session: "auto" }),
-			storage: r2({ binding: "MEDIA" }),
-		}),
-	],
-	fonts: [
-		{
-			provider: fontProviders.google(),
-			name: "Inter",
-			cssVariable: "--font-body",
-			weights: [400, 500, 600, 700],
-			fallbacks: ["sans-serif"],
-		},
-		{
-			provider: fontProviders.google(),
-			name: "JetBrains Mono",
-			cssVariable: "--font-mono",
-			weights: [400, 500],
-			fallbacks: ["monospace"],
-		},
-	],
-	devToolbar: { enabled: false },
-});
+@@ -1,32 +1,38 @@
+{
+  "name": "my-emdash-site",
+  "version": "0.0.3",
+  "private": true,
+  "type": "module",
+  "emdash": {
+    "seed": "seed/seed.json"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.1",
+    "@astrojs/react": "^6.0.5",
+    "@emdash-cms/cloudflare": "^1.0.1",
+    "astro": "^7.3.2",
+    "emdash": "^1.0.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "wrangler": "^4.125.0"
+  },
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+}
