@@ -1,6 +1,6 @@
-import cloudflare from "@astrojs/cloudflare";
+import cloudflare, { sandbox } from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
+import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -17,16 +17,13 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
 			
-			// 1. تشغيل مشغل بيئة العزل من الحزمة الصحيحة
+			// 1. تفعيل مشغل بيئة العزل الخاص بـ Cloudflare Workers
 			sandboxRunner: sandbox(),
 
-			// 2. تفعيل السجل الرسمي لـ EmDash
+			// 2. تفعيل السجل الرسمي للإضافات
 			registry: {
 				aggregatorUrl: "https://registry.emdashcms.com",
 			},
-			
-			// الإضافات المعزولة (إن وجدت)
-			sandboxed: [],
 		}),
 	],
 	fonts: [
