@@ -4,9 +4,6 @@ import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
-// استيراد الإضافة الأصلية لصفحة 404 المخصصة
-import { custom404Plugin } from "@azydeco/emdash-plugin-custom-404";
-
 export default defineConfig({
 	output: "server",
 	adapter: cloudflare(),
@@ -19,11 +16,6 @@ export default defineConfig({
 		emdash({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
-			
-			// تفعيل الإضافة الأصلية هنا (وليست sandboxed)
-			plugins: [
-				custom404Plugin(),
-			],
 		}),
 	],
 	fonts: [
