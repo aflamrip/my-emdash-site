@@ -10,7 +10,7 @@ const {
 	entries: posts,
 	cacheHint,
 	nextCursor,
-} = await getEmDashCollection("posts", {
+} = await getEmDashCollection("movies", {
 	orderBy: { published_at: "desc" },
 	limit: 20,
 	cursor,
