@@ -45,10 +45,10 @@
 			]
 		},
 		{
-			"slug": "pages",
-			"label": "Pages",
-			"labelSingular": "Page",
-			"urlPattern": "/pages/{slug}",
+			"slug": "movies",
+			"label": "movies",
+			"labelSingular": "movie",
+			"urlPattern": "/movies/{slug}",
 			"supports": ["drafts", "revisions", "preview", "search", "seo"],
 			"fields": [
 				{
@@ -73,7 +73,7 @@
 			"label": "Categories",
 			"labelSingular": "Category",
 			"hierarchical": true,
-			"collections": ["posts"],
+			"collections": ["movies"],
 			"terms": [
 				{
 					"slug": "development",
@@ -94,7 +94,7 @@
 			"label": "Tags",
 			"labelSingular": "Tag",
 			"hierarchical": false,
-			"collections": ["posts"],
+			"collections": ["movies"],
 			"terms": [
 				{
 					"slug": "webdev",
