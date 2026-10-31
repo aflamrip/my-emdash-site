@@ -7,6 +7,14 @@ import emdash from "emdash/astro";
 export default defineConfig({
 	output: "server",
 	adapter: cloudflare(),
+	// إضافة إعدادات الـ i18n لجعل اللغة العربية هي الافتراضية
+	i18n: {
+		defaultLocale: "ar",
+		locales: ["ar", "en"],
+		fallback: {
+			en: "ar"
+		}
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
@@ -21,7 +29,7 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.google(),
-			name: "Inter",
+			name: "Cairo", // خط عربي أساسي للنصوص العامة
 			cssVariable: "--font-body",
 			weights: [400, 500, 600, 700],
 			fallbacks: ["sans-serif"],
